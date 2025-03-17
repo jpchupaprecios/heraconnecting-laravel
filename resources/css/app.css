@@ -58,5 +58,8 @@
         @apply bg-background text-foreground;
     }
 }
-
+.hc-header{
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
 
