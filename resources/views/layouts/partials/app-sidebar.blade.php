@@ -1,10 +1,13 @@
 <header class="sticky top-0 z-30 w-full border-b bg-background">
     <div class="flex h-14 items-center px-4 hc-header">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-2 mr-6">
+            <img class="h-12" src="/images/logo-h.png" alt="Heraconnecting Logo">
+            <!--
             <div class="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
                 <span class="text-lg font-bold text-primary-foreground">H</span>
             </div>
             <span class="text-lg font-semibold hidden md:block">Heraconnecting</span>
+            -->
         </a>
     </div>
     <div class="flex h-14 items-center px-4">
