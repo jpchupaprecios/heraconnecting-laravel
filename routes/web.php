@@ -17,6 +17,7 @@ use App\Http\Controllers\InvestorsController;
 use App\Http\Controllers\UnderwriterController;
 use App\Http\Controllers\DSCRController;
 use App\Http\Controllers\LoanappController;
+use App\Http\Controllers\NotificationsController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -121,6 +122,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Investors
     Route::get('investors/participants', [InvestorsController::class, 'participants'])->name('investors.participants');
     Route::get('investors/ach-els', [InvestorsController::class, 'achEls'])->name('investors.ach-els');
+
+    Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+
 });
 
 require __DIR__.'/auth.php';

@@ -330,6 +330,109 @@
 
         <!-- Perfil de usuario y logout -->
         <div class="ml-auto flex items-center space-x-4">
+            <!-- Campanita de Notificaciones -->
+            <div x-data="{ open: false, notifications: 3 }" class="relative mr-2">
+                <button
+                    @click="open = !open"
+                    class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground relative"
+                >
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                        </svg>
+                        <!-- Indicador de notificaciones no leídas -->
+                        <div x-show="notifications > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                            <span x-text="notifications"></span>
+                        </div>
+                    </div>
+                </button>
+
+                <div
+                    x-show="open"
+                    @click.outside="open = false"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    class="absolute right-0 top-full mt-2 z-50 w-80 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+                    style="display: none;"
+                >
+                    <div class="p-2 border-b">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-semibold">Notificaciones</h3>
+                            <button @click="notifications = 0" class="text-xs text-blue-500 hover:text-blue-700">Marcar todas como leídas</button>
+                        </div>
+                    </div>
+
+                    <div class="py-1 max-h-96 overflow-y-auto">
+                        <!-- Notificación 1 -->
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground border-b">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                                            <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                                            <line x1="2" x2="22" y1="10" y2="10"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Nuevo préstamo aprobado</p>
+                                    <p class="text-xs text-muted-foreground">El préstamo #12345 ha sido aprobado</p>
+                                    <p class="text-xs text-muted-foreground mt-1">Hace 5 minutos</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Notificación 2 -->
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground border-b">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Seguro por vencer</p>
+                                    <p class="text-xs text-muted-foreground">El seguro del préstamo #54321 vence en 7 días</p>
+                                    <p class="text-xs text-muted-foreground mt-1">Hace 1 hora</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Notificación 3 -->
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Desembolso completado</p>
+                                    <p class="text-xs text-muted-foreground">El desembolso para el proyecto #678 ha sido completado</p>
+                                    <p class="text-xs text-muted-foreground mt-1">Ayer</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="p-2 border-t">
+                        <a href="{{ route('notifications.index') }}" class="block text-center text-xs text-blue-500 hover:text-blue-700">
+                            Ver todas las notificaciones
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div x-data="{ open: false }" class="relative">
                 <button
                     @click="open = !open"
@@ -342,7 +445,6 @@
                     </div>
                     <span class="hidden md:block">{{ Auth::user()->name }}</span>
                 </button>
-
                 <div
                     x-show="open"
                     @click.outside="open = false"
