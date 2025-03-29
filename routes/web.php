@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\ExtensionController;
@@ -125,6 +126,41 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
 
+
+    Route::prefix('loanapp')->group(function () {
+        Route::get('/', [LoanappController::class, 'index'])->name('loanapp.index');
+        Route::get('/create', [LoanappController::class, 'create'])->name('loanapp.create');
+        Route::post('/', [LoanappController::class, 'store'])->name('loanapp.store');
+        Route::get('/{loanApplication}', [LoanappController::class, 'show'])->name('loanapp.show');
+        Route::get('/{loanApplication}/edit', [LoanappController::class, 'edit'])->name('loanapp.edit');
+        Route::put('/{loanApplication}', [LoanappController::class, 'update'])->name('loanapp.update');
+        Route::delete('/{loanApplication}', [LoanappController::class, 'destroy'])->name('loanapp.destroy');
+    });
+    Route::prefix('chat')->group(function () {
+        Route::get('/', [ChatController::class, 'index'])->name('chat.index');
+    });
+
+
+    Route::prefix('loans')->group(function () {
+        Route::get('/', [LoanController::class, 'index'])->name('loans.index');
+        Route::get('/create', [LoanController::class, 'create'])->name('loans.create');
+        Route::post('/', [LoanController::class, 'store'])->name('loans.store');
+        Route::get('/{loan}', [LoanController::class, 'show'])->name('loans.show');
+        Route::get('/{loan}/edit', [LoanController::class, 'edit'])->name('loans.edit');
+        Route::put('/{loan}', [LoanController::class, 'update'])->name('loans.update');
+        Route::delete('/{loan}', [LoanController::class, 'destroy'])->name('loans.destroy');
+
+        // Rutas para las secciones (tabs) de la vista Loan
+        Route::get('/property', [LoanController::class, 'property'])->name('loans.property');
+        Route::get('/borrower', [LoanController::class, 'borrower'])->name('loans.borrower');
+        Route::get('/loan', [LoanController::class, 'loan'])->name('loans.loan');
+        Route::get('/title-company', [LoanController::class, 'titleCompany'])->name('loans.title_company');
+        Route::get('/lender', [LoanController::class, 'lender'])->name('loans.lender');
+        Route::get('/documents', [LoanController::class, 'documents'])->name('loans.documents');
+        Route::get('/manager', [LoanController::class, 'manager'])->name('loans.manager');
+        Route::get('/templates', [LoanController::class, 'templates'])->name('loans.templates');
+        Route::get('/notes', [LoanController::class, 'notes'])->name('loans.notes');
+    });
 });
 
 require __DIR__.'/auth.php';

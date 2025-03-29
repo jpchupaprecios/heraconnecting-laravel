@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Loan;
-class LoanController extends Controller
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -93,7 +93,7 @@ class LoanController extends Controller
         // Añadimos las tareas al loan
         // (Puedes hacerlo como un array normal o una Collection)
         $loan->tasks = [$task1, $task2];
-        return view('pages.loans.index', compact('loan'));
+        return view('pages.chat.index', compact('loan'));
     }
 
     /**
